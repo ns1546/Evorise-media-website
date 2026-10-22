@@ -39,3 +39,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# Local dev & scratch artifacts
+dev.log
+scratch/
+backups/
+project_backups/
+uddoktapay-installer/
+*.log
+
+# Scratch scripts & temporary patches
+replace*.js
+replace*.mjs
+fix-*.js
+patch-*.js
+seed-data.js
+sample.pdf
+Enterprise_Audit_Report.md
+DESIGN.md
+.windsurf/
+.claude/
+.agents/
