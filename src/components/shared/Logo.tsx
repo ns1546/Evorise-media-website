@@ -23,45 +23,81 @@ export function Logo({
   const dim = dimensions[size] || dimensions.md;
 
   if (markOnly) {
-    return (
-      <div className={"inline-flex items-center shrink-0 " + className}>
+    if (variant === "white") {
+      return (
         <img
-          src="/logo-mark-dark.png"
+          src="/logo-mark-white.png"
           alt="EVORISE MEDIA"
           width={dim.mark}
           height={dim.mark}
-          className="shrink-0 object-contain"
+          className={"shrink-0 object-contain " + className}
         />
-      </div>
+      );
+    }
+    return (
+      <img
+        src="/logo-mark-dark.png"
+        alt="EVORISE MEDIA"
+        width={dim.mark}
+        height={dim.mark}
+        className={"shrink-0 object-contain " + className}
+      />
     );
   }
 
-  // If variant="white", it means the parent container has a dark background (e.g. dark admin sidebar or footer CTA)
-  // Instead of turning the logo text white, we present the exact black logo on a clean, premium white badge
+  // When variant="white" (for dark surfaces like Admin sidebar, Login dark hero, or dark footer):
+  // Directly render the WHITE logo on 100% TRANSPARENT background — ZERO white box, ZERO pill wrapper!
   if (variant === "white") {
     return (
-      <div className={"inline-flex items-center shrink-0 bg-white/95 rounded-xl px-2 py-1 shadow-sm border border-white/20 " + className}>
+      <div className={"flex items-center shrink-0 " + className}>
         <img
-          src="/logo-tight.png"
+          src="/logo-tight-white.png"
           alt="EVORISE MEDIA"
           width={dim.width}
           height={dim.height}
           className="object-contain shrink-0"
-          style={{ height: dim.height - 4, width: "auto" }}
+          style={{ height: dim.height, width: "auto" }}
         />
       </div>
     );
   }
 
-  // Standard display: The user's exact original logo (black EV mark + black EVORISE MEDIA text) with background removed
+  // When variant="dark" (for light surfaces):
+  if (variant === "dark") {
+    return (
+      <div className={"flex items-center shrink-0 " + className}>
+        <img
+          src="/logo-tight-dark.png"
+          alt="EVORISE MEDIA"
+          width={dim.width}
+          height={dim.height}
+          className="object-contain shrink-0"
+          style={{ height: dim.height, width: "auto" }}
+        />
+      </div>
+    );
+  }
+
+  // Default auto variant:
+  // On light backgrounds displays black logo on 100% transparent background
+  // If dark mode is active on html (dark:), displays white logo on 100% transparent background
+  // ZERO white boxes or pill wrappers anywhere!
   return (
     <div className={"flex items-center shrink-0 " + className}>
       <img
-        src="/logo-tight.png"
+        src="/logo-tight-dark.png"
         alt="EVORISE MEDIA"
         width={dim.width}
         height={dim.height}
-        className="object-contain shrink-0"
+        className="object-contain shrink-0 block dark:hidden"
+        style={{ height: dim.height, width: "auto" }}
+      />
+      <img
+        src="/logo-tight-white.png"
+        alt="EVORISE MEDIA"
+        width={dim.width}
+        height={dim.height}
+        className="object-contain shrink-0 hidden dark:block"
         style={{ height: dim.height, width: "auto" }}
       />
     </div>
