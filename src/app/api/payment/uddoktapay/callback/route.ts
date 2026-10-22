@@ -1,3 +1,4 @@
+import { sendMetaCapiEvent } from "@/lib/meta-capi";
 import { NextResponse } from "next/server";
 import { prisma as db } from "@/lib/prisma";
 import { verifyUddoktaPayPayment } from "@/lib/uddoktapay";
@@ -54,6 +55,28 @@ export async function GET(req: Request) {
           });
         }
       }
+
+            // Dispatch Server-Side Meta Conversion API (CAPI) Purchase event
+      const course = courseId ? await db.course.findUnique({ where: { id: courseId }, select: { title: true, price: true } }) : null;
+      const user = userId ? await db.user.findUnique({ where: { id: userId }, select: { email: true, name: true, phone: true } }) : null;
+
+      await sendMetaCapiEvent({
+        eventName: "Purchase",
+        eventId: `purchase_${finalOrderId || invoiceId}`,
+        userData: {
+          email: user?.email,
+          phone: user?.phone,
+          firstName: user?.name,
+        },
+        customData: {
+          currency: "BDT",
+          value: Number(verification.amount) || course?.price || 0,
+          content_name: course?.title || "Online Course",
+          content_ids: courseId ? [courseId] : [],
+          content_type: "product",
+          order_id: finalOrderId || invoiceId,
+        },
+      }).catch(err => console.error("[Meta CAPI Callback Error]", err));
 
       return NextResponse.redirect(`${appUrl}/dashboard?payment=success`);
     } else {

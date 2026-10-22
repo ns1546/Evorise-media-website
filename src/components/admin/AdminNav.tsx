@@ -12,7 +12,8 @@ import {
   Trash2, 
   Image as ImageIcon, 
   Database,
-  ShieldAlert
+  ShieldAlert,
+  Target
 } from "lucide-react";
 
 interface NavItem {

@@ -4,16 +4,41 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
-export const pageview = () => {
+export const trackEvent = async (eventName: string, customData: Record<string, any> = {}, userData: Record<string, any> = {}) => {
+  const eventId = "evt_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  // 1. Browser Pixel Track (with eventID for deduplication)
   if (typeof window !== "undefined" && (window as any).fbq) {
-    (window as any).fbq("track", "PageView");
+    (window as any).fbq("track", eventName, customData, { eventID: eventId });
+  }
+
+  // 2. Server-Side Conversion API (CAPI) - Token stays 100% hidden on server
+  try {
+    if (typeof window !== "undefined") {
+      fetch("/api/track/facebook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName,
+          eventId,
+          eventSourceUrl: currentUrl,
+          customData,
+          userData,
+        }),
+      }).catch(() => {});
+    }
+  } catch (e) {
+    // Fail silently in background
   }
 };
 
+export const pageview = () => {
+  trackEvent("PageView");
+};
+
 export const fbEvent = (name: string, options = {}) => {
-  if (typeof window !== "undefined" && (window as any).fbq) {
-    (window as any).fbq("track", name, options);
-  }
+  trackEvent(name, options);
 };
 
 export default function MetaPixel({ fbPixelId }: { fbPixelId?: string | null }) {
@@ -23,10 +48,8 @@ export default function MetaPixel({ fbPixelId }: { fbPixelId?: string | null }) 
 
   useEffect(() => {
     if (!fbPixelId) return;
-    if (!loaded) return;
-
     pageview();
-  }, [pathname, searchParams, loaded, fbPixelId]);
+  }, [pathname, searchParams, fbPixelId]);
 
   if (!fbPixelId) {
     return null;

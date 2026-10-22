@@ -23,6 +23,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     { iconName: "PlusCircle",      label: "নতুন কোর্স",             href: "/admin/courses/create" },
     { iconName: "ImageIcon",       label: "ব্যানার ম্যানেজমেন্ট",     href: "/admin/banners" },
     { iconName: "ShieldAlert",     label: "সিকিউরিটি ও পাইরেসি",     href: "/admin/security" },
+    { iconName: "Target",          label: "পিক্সেল ও মার্কেটিং ট্র্যাকিং", href: "/admin/tracking" },
     { iconName: "Settings",        label: "সিস্টেম ও পেমেন্ট সেটিংস", href: "/admin/settings" },
     { iconName: "Database",        label: "ডাটাবেজ ও ব্যাকআপ",       href: "/admin/backups" },
     { iconName: "Trash2",          label: "রিসাইকেল বিন",           href: "/admin/trash" },
