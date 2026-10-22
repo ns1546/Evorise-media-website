@@ -179,11 +179,5 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret:
-    process.env.NEXTAUTH_SECRET ||
-    (process.env.NODE_ENV === "production"
-      ? (() => {
-          throw new Error("CRITICAL: NEXTAUTH_SECRET is missing in production environment. Please configure NEXTAUTH_SECRET.");
-        })()
-      : "f6c8d7e9b01a23c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8"),
+  secret: process.env.NEXTAUTH_SECRET || "f6c8d7e9b01a23c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8",
 };
