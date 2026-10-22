@@ -370,7 +370,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
               <div className="px-6 py-4 border-b border-border flex items-center gap-3 bg-surface">
                 <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-black flex items-center justify-center shadow-[0_0_10px_rgba(200,144,10,0.4)]">২</span>
                 <h2 className="font-black text-foreground text-base">
-                  {paymentMethod === "bingopay" ? "Bingo Pay গেটওয়ে নির্দেশনা" : "পেমেন্ট করুন"}
+                  {paymentMethod === "bingopay" ? "অনলাইন গেটওয়ে নির্দেশনা (UddoktaPay / Paymently)" : "পেমেন্ট করুন"}
                 </h2>
               </div>
               <div className="p-6">
@@ -385,7 +385,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
 
                     <div className="space-y-2.5 pt-1">
                       {[
-                        `নিচের বাটনে ক্লিক করলে আপনি Bingo Pay-এর অফিসিয়াল সুরক্ষিত পেমেন্ট গেটওয়েতে চলে যাবেন`,
+                        `নিচের বাটনে ক্লিক করলে আপনি অফিসিয়াল সুরক্ষিত পেমেন্ট গেটওয়েতে (Paymently) চলে যাবেন`,
                         `সেখানে বিকাশ, নগদ, কার্ড বা যেকোনো অপশন বেছে নিয়ে পেমেন্ট সম্পন্ন করুন`,
                         `পেমেন্ট সফল হওয়ার সাথে সাথে আমাদের সিস্টেম স্বয়ংক্রিয়ভাবে আপনার কোর্স আনলক করে দেবে`,
                         `কোনো অপেক্ষার প্রয়োজন নেই — আপনি সাথে সাথেই লেসন দেখা শুরু করতে পারবেন`,
