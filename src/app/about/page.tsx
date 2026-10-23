@@ -58,6 +58,24 @@ export default function AboutPage() {
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto leading-relaxed">
             বাংলাদেশের শীর্ষস্থানীয় ক্রিয়েটিভ মিডিয়া ও মিউজিক একাডেমি। আমাদের লিড মেন্টর JKH Jesan-এর নির্দেশনায় এখানে তৈরি হয় আন্তর্জাতিক মানের মিউজিক ও সাউন্ড ক্রাফট।
           </p>
+
+          {/* Sister concern official badge */}
+          <div className="mt-8 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-surface/80 border border-primary/30 backdrop-blur-md shadow-md">
+            <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs sm:text-sm font-semibold text-foreground/90">
+              EvoRise Media হলো{" "}
+              <a
+                href="https://www.facebook.com/EvoRiseSolutions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-bold hover:underline inline-flex items-center gap-1"
+              >
+                EvoRise Solutions
+                <ArrowRight size={13} className="-rotate-45" />
+              </a>
+              -এর একটি আধুনিক ক্রিয়েটিভ মিডিয়া ও একাডেমি প্রতিষ্ঠান।
+            </span>
+          </div>
         </div>
       </section>
 

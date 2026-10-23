@@ -101,6 +101,13 @@ export function Footer() {
               <Logo size="md" />
             </Link>
 
+            {/* Sister concern badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold"
+              style={{ background: "rgba(200, 144, 10, 0.12)", border: "1px solid rgba(200, 144, 10, 0.25)", color: "var(--gold)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>EvoRise Solutions-এর একটি অঙ্গপ্রতিষ্ঠান</span>
+            </div>
+
             <p className="text-sm leading-relaxed" style={{ color: "var(--foreground-muted)", maxWidth: "24ch" }}>
               EvoRise Media — ক্রিয়েটিভ মিডিয়া ও মিউজিক একাডেমি। লিড মেন্টর JKH Jesan-এর সাথে প্রফেশনাল সাউন্ড ডিজাইন ও মিউজিক প্রোডাকশন শিখুন।
             </p>
@@ -188,9 +195,24 @@ export function Footer() {
       {/* ── Bottom bar ──────────────────────────────────────────── */}
       <div style={{ borderTop: "1px solid var(--border)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-28 sm:pb-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-medium" style={{ color: "var(--foreground-muted)" }}>
-            © {year} EvoRise Media. সর্বস্বত্ব সংরক্ষিত। · চিফ মেন্টর: JKH Jesan
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+            <p className="text-xs font-medium" style={{ color: "var(--foreground-muted)" }}>
+              © {year} EvoRise Media. সর্বস্বত্ব সংরক্ষিত। · চিফ মেন্টর: JKH Jesan
+            </p>
+            <span className="hidden sm:inline text-xs opacity-40">•</span>
+            <p className="text-xs font-semibold flex items-center gap-1.5" style={{ color: "var(--foreground-muted)" }}>
+              <span>Developed by</span>
+              <a
+                href="https://www.facebook.com/EvoRiseSolutions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-bold transition-all inline-flex items-center gap-1 hover:text-primary-dark"
+              >
+                EvoRise Solutions
+                <IconArrowUpRight size={12} strokeWidth={2.5} />
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-5">
             <Link href="/terms"   className="text-xs font-medium transition-colors hover:text-primary" style={{ color: "var(--foreground-muted)" }}>শর্তাবলী</Link>
             <Link href="/privacy" className="text-xs font-medium transition-colors hover:text-primary" style={{ color: "var(--foreground-muted)" }}>গোপনীয়তা নীতি</Link>
