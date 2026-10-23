@@ -167,7 +167,7 @@ export default async function DashboardCoursesPage() {
                             style={{ backgroundImage: `url(${course.thumbnail})` }}
                           />
                         ) : (
-                          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
+                          <div className="absolute inset-0 bg-[url('/images/vocal-processing-course.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
                         )}
                         <div className="absolute inset-0 opacity-80" />
                         <PlayCircle className="text-foreground relative z-10 drop-shadow-lg group-hover:text-primary transition-colors" size={44} />

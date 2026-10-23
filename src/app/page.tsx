@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'EvoRise Media | Creative Academy',
     description: 'EvoRise Media — ক্রিয়েটিভ মিডিয়া ও মিউজিক একাডেমি।',
-    images: [{ url: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2000&auto=format&fit=crop' }]
+    images: [{ url: '/images/mentor-jjesan-mandolin.jpg' }]
   }
 };
 
@@ -185,7 +185,7 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Right: Studio image with floating stats */}
+            {/* Right: Studio image with clean instructor badge */}
             <div className="relative hidden lg:flex items-center justify-center h-full min-h-140">
 
               {/* Main image */}
@@ -198,54 +198,26 @@ export default async function Home() {
                 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=900&auto=format&fit=crop"
-                  alt="Professional music studio"
-                  className="w-full h-full object-cover"
+                  src="/images/mentor-jjesan-mandolin.jpg"
+                  alt="JKH Jesan — Music Producer & Instructor"
+                  className="w-full h-full object-cover object-center"
                 />
                 {/* Warm gradient overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 h-2/5"
-                  style={{ background: "linear-gradient(to top, rgba(26, 31, 15, 0.75) 0%, transparent 100%)" }} />
+                  style={{ background: "linear-gradient(to top, rgba(26, 31, 15, 0.85) 0%, rgba(26, 31, 15, 0.25) 50%, transparent 100%)" }} />
 
                 {/* Instructor badge */}
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.14em] mb-1"
-                      style={{ color: "rgba(242, 237, 228, 0.6)" }}>চিফ মেন্টর · EvoRise Media</p>
-                    <p className="text-lg font-black" style={{ color: "var(--cream-100)", letterSpacing: "-0.02em" }}>JKH Jesan</p>
-                    <p className="text-xs font-medium" style={{ color: "rgba(242, 237, 228, 0.65)" }}>Lead Music Production Instructor</p>
+                      style={{ color: "rgba(242, 237, 228, 0.7)" }}>চিফ মেন্টর · EvoRise Media</p>
+                    <p className="text-xl font-black" style={{ color: "var(--cream-100)", letterSpacing: "-0.02em" }}>JKH Jesan</p>
+                    <p className="text-xs font-medium" style={{ color: "rgba(242, 237, 228, 0.75)" }}>Lead Music Production Instructor</p>
                   </div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full"
                     style={{ background: "rgba(200, 144, 10, 0.90)", backdropFilter: "blur(12px)" }}>
                     <IconStar size={12} fill="currentColor" className="text-primary-foreground" />
                     <span className="text-xs font-bold" style={{ color: "var(--ink-900)" }}>{stats.rating}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating stat card — top left */}
-              <div className="absolute top-12 -left-6 card-shell z-20">
-                <div className="card-inner px-5 py-4 flex items-center gap-3" style={{ minWidth: "160px" }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ background: "var(--gold-100)", border: "1px solid var(--gold-200)" }}>
-                    <IconUsers size={18} strokeWidth={1.75} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-black leading-none" style={{ color: "var(--ink-900)", letterSpacing: "-0.04em" }}>{stats.students}+</p>
-                    <p className="text-xs font-semibold mt-0.5" style={{ color: "var(--foreground-muted)" }}>সক্রিয় শিক্ষার্থী</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating stat card — bottom right */}
-              <div className="absolute bottom-20 -right-6 card-shell z-20">
-                <div className="card-inner px-5 py-4 flex items-center gap-3" style={{ minWidth: "160px" }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ background: "var(--gold-100)", border: "1px solid var(--gold-200)" }}>
-                    <IconBook size={18} strokeWidth={1.75} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-black leading-none" style={{ color: "var(--ink-900)", letterSpacing: "-0.04em" }}>{stats.lessons}+</p>
-                    <p className="text-xs font-semibold mt-0.5" style={{ color: "var(--foreground-muted)" }}>প্রিমিয়াম লেসন</p>
                   </div>
                 </div>
               </div>
@@ -293,7 +265,7 @@ export default async function Home() {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={course.thumbnail || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop"}
+                      src={course.thumbnail || "/images/vocal-processing-course.jpg"}
                       alt={course.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
@@ -439,15 +411,15 @@ export default async function Home() {
                 style={{ background: "var(--cream-300)", border: "1px solid var(--border)" }} />
 
               <div className="relative rounded-2xl overflow-hidden"
-                style={{ aspectRatio: "4/5", maxWidth: "400px", margin: "0 auto", boxShadow: "var(--shadow-xl)" }}>
+                style={{ aspectRatio: "4/5", maxWidth: "420px", margin: "0 auto", boxShadow: "var(--shadow-xl)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop"
-                  alt="JKH Jesan — Music Producer"
-                  className="w-full h-full object-cover"
+                  src="/images/mentor-jjesan-accordion.jpg"
+                  alt="JKH Jesan — Lead Music Producer & Instructor"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgba(26, 31, 15, 0.80) 0%, transparent 55%)" }} />
+                  style={{ background: "linear-gradient(to top, rgba(26, 31, 15, 0.85) 0%, rgba(26, 31, 15, 0.2) 45%, transparent 65%)" }} />
 
                 {/* Overlay badge */}
                 <div className="absolute bottom-5 left-5 right-5">
@@ -457,29 +429,7 @@ export default async function Home() {
                     <span className="text-xs font-bold" style={{ color: "var(--primary-foreground)" }}>চিফ মেন্টর · EvoRise Media</span>
                   </div>
                   <h3 className="text-2xl font-black mb-1" style={{ color: "var(--cream-100)", letterSpacing: "-0.03em" }}>JKH Jesan</h3>
-                  <p className="text-xs font-medium" style={{ color: "rgba(242, 237, 228, 0.65)" }}>Lead Music Producer & Head Instructor</p>
-                </div>
-              </div>
-
-              {/* Floating student count */}
-              <div className="absolute -top-4 -right-4 card-shell hidden lg:block">
-                <div className="card-inner px-4 py-3 flex items-center gap-3">
-                  <div className="flex -space-x-2">
-                    {["র", "ত", "স"].map((c, i) => (
-                      <div key={i} className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs"
-                        style={{
-                          background: i === 0 ? "var(--primary)" : i === 1 ? "var(--ink-700)" : "var(--ink-500)",
-                          color: "var(--cream-100)",
-                          border: "2px solid var(--cream-100)"
-                        }}>
-                        {c}
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="font-black text-sm leading-none" style={{ color: "var(--ink-900)" }}>{stats.students}+</p>
-                    <p className="text-[10px] font-semibold mt-0.5" style={{ color: "var(--foreground-muted)" }}>শিক্ষার্থী এনরোলড</p>
-                  </div>
+                  <p className="text-xs font-medium" style={{ color: "rgba(242, 237, 228, 0.75)" }}>Lead Music Producer & Head Instructor</p>
                 </div>
               </div>
             </div>

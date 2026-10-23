@@ -73,7 +73,7 @@ export default function AboutPage() {
               <div className="relative aspect-4/5 max-w-sm mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border">
                 {/* Instructor photo — Replace URL with your actual professional studio portrait */}
                 <div className="h-full bg-cover bg-center bg-background"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop')" }}>
+                  style={{ backgroundImage: "url('/images/mentor-jjesan-accordion.jpg')" }}>
                   <div className="absolute inset-0 bg-background/60" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <div className="inline-flex items-center gap-2 bg-primary text-foreground px-3 py-1.5 rounded-full text-xs font-bold mb-3 shadow-lg">

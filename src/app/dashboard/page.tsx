@@ -222,7 +222,7 @@ export default async function DashboardPage() {
                           {/* Thumbnail */}
                           <div className="sm:w-48 h-32 sm:h-auto relative bg-background shrink-0 overflow-hidden">
                             <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                              style={{ backgroundImage: `url(${course.thumbnail || "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=400&auto=format&fit=crop"})` }} />
+                              style={{ backgroundImage: `url(${course.thumbnail || "/images/vocal-processing-course.jpg"})` }} />
                             <div className="absolute inset-0 opacity-80" />
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">

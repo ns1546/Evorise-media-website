@@ -181,7 +181,7 @@ export default async function CourseDetails({ params }: { params: Promise<{ slug
                     {course.thumbnail ? (
                       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${course.thumbnail})` }}></div>
                     ) : (
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-[url('/images/vocal-processing-course.jpg')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity"></div>
                     )}
                     <div className="absolute inset-0 bg-background/25 group-hover:bg-background/10 transition-colors"></div>
                     <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center z-10 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
@@ -245,7 +245,7 @@ export default async function CourseDetails({ params }: { params: Promise<{ slug
                   {course.thumbnail ? (
                       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${course.thumbnail})`}}></div>
                   ) : (
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-[url('/images/vocal-processing-course.jpg')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity"></div>
                   )}
                   <div className="absolute inset-0 bg-background/20 group-hover:bg-background/10 transition-colors"></div>
                   <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center z-10 group-hover:scale-110 transition-transform shadow-lg shadow-primary/30">
@@ -369,7 +369,7 @@ export default async function CourseDetails({ params }: { params: Promise<{ slug
               <h2 className="text-2xl font-extrabold tracking-tight mb-6 text-accent">আপনার চিফ মেন্টর</h2>
               <div className="bg-surface border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-8 items-start">
                 <div className="w-32 h-32 rounded-2xl shrink-0 overflow-hidden border border-border">
-                  <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" alt="JKH Jesan" className="w-full h-full object-cover" />
+                  <img src="/images/mentor-jjesan-accordion.jpg" alt="JKH Jesan" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-4">
                   <div>

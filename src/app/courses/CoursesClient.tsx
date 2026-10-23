@@ -140,7 +140,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
                           style={{
                             backgroundImage: `url(${
                               course.thumbnail ||
-                              "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop"
+                              "/images/vocal-processing-course.jpg"
                             })`
                           }}
                         />
