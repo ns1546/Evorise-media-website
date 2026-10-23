@@ -21,7 +21,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
   const [course, setCourse] = useState<any>(null);
   const [settings, setSettings] = useState<any>(null);
   const [copied, setCopied] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("bingopay");
+  const [paymentMethod, setPaymentMethod] = useState("uddoktapay");
   const [trxId, setTrxId] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -74,12 +74,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
     ? (course.price - course.discountPrice) 
     : 0;
 
-  const handleBingoPaySubmit = async (e: React.FormEvent) => {
+  const handleUddoktaPaySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setIsSubmitting(true);
     try {
-      // 1. Try UddoktaPay / Paymently Gateway
       const uddoktaRes = await fetch("/api/payment/uddoktapay/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -101,22 +100,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
         return;
       }
 
-      // 2. Fallback to BingoPay if configured
-      const res = await fetch("/api/payment/bingopay/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          courseId,
-          phone: phone.trim() || undefined,
-        }),
-      });
-      const data = await res.json();
-      if (res.ok && data.paymentUrl) {
-        window.location.href = data.paymentUrl;
-        return;
-      }
-
-      setError(uddoktaData.message || data.message || "পেমেন্ট গেটওয়েতে সংযোগ করতে সমস্যা হয়েছে।");
+      setError(uddoktaData.message || "UddoktaPay গেটওয়েতে সংযোগ করতে সমস্যা হয়েছে। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।");
     } catch {
       setError("সার্ভার ত্রুটি! কিছুক্ষণ পর আবার চেষ্টা করুন।");
     } finally {
@@ -292,12 +276,12 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Bingo Pay - Primary Recommended Automated Gateway */}
+                  {/* UddoktaPay - Primary Recommended Automated Gateway */}
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod("bingopay")}
+                    onClick={() => setPaymentMethod("uddoktapay")}
                     className={`sm:col-span-2 relative p-5 rounded-xl border-2 transition-all duration-200 text-left ${
-                      paymentMethod === "bingopay"
+                      paymentMethod === "uddoktapay"
                         ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(200,144,10,0.25)]"
                         : "border-border bg-surface/5 hover:border-border hover:bg-surface/10"
                     }`}
@@ -309,7 +293,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
                           ইনস্ট্যান্ট অটো-আনলক
                         </span>
                       </div>
-                      {paymentMethod === "bingopay" && (
+                      {paymentMethod === "uddoktapay" && (
                         <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
                           <CheckCircle2 size={13} />
                         </span>
@@ -370,11 +354,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
               <div className="px-6 py-4 border-b border-border flex items-center gap-3 bg-surface">
                 <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-black flex items-center justify-center shadow-[0_0_10px_rgba(200,144,10,0.4)]">২</span>
                 <h2 className="font-black text-foreground text-base">
-                  {paymentMethod === "bingopay" ? "অনলাইন গেটওয়ে নির্দেশনা (UddoktaPay / Paymently)" : "পেমেন্ট করুন"}
+                  {paymentMethod === "uddoktapay" ? "অনলাইন গেটওয়ে নির্দেশনা (UddoktaPay / Paymently)" : "পেমেন্ট করুন"}
                 </h2>
               </div>
               <div className="p-6">
-                {paymentMethod === "bingopay" ? (
+                {paymentMethod === "uddoktapay" ? (
                   <div className="bg-surface border border-border rounded-xl p-5 space-y-4">
                     <div className="flex items-center gap-2 mb-2">
                       <ShieldCheck size={18} className="text-primary" />
@@ -488,12 +472,12 @@ export default function CheckoutPage({ params }: { params: Promise<{ courseId: s
               <div className="px-6 py-4 border-b border-border flex items-center gap-3 bg-surface">
                 <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-black flex items-center justify-center shadow-[0_0_10px_rgba(200,144,10,0.4)]">৩</span>
                 <h2 className="font-black text-foreground text-base">
-                  {paymentMethod === "bingopay" ? "পেমেন্ট গেটওয়েতে যান" : "পেমেন্ট তথ্য সাবমিট করুন"}
+                  {paymentMethod === "uddoktapay" ? "পেমেন্ট গেটওয়েতে যান" : "পেমেন্ট তথ্য সাবমিট করুন"}
                 </h2>
               </div>
 
-              {paymentMethod === "bingopay" ? (
-                <form onSubmit={handleBingoPaySubmit} className="p-6 space-y-5">
+              {paymentMethod === "uddoktapay" ? (
+                <form onSubmit={handleUddoktaPaySubmit} className="p-6 space-y-5">
                   {error && (
                     <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl flex items-center gap-3 text-sm font-bold">
                       <AlertCircle size={16} className="shrink-0" /> {error}

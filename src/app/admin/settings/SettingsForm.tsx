@@ -66,7 +66,7 @@ export default function SettingsForm({ initialSettings }: { initialSettings: Set
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl">
-      {/* 0. Automated Gateway — Bingo Pay (Production Mode) */}
+      {/* 0. Automated Gateway — UddoktaPay / Paymently (Production Active) */}
       <div className="bg-primary/5 border-2 border-primary/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm shadow-xl">
         <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
           <div className="flex items-center gap-3">
@@ -75,13 +75,13 @@ export default function SettingsForm({ initialSettings }: { initialSettings: Set
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-black text-foreground">Bingo Pay অটোমেটিক গেটওয়ে</h2>
+                <h2 className="text-lg font-black text-foreground">UddoktaPay / Paymently অটোমেটিক গেটওয়ে</h2>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
                   PRODUCTION ACTIVE
                 </span>
               </div>
               <p className="text-xs text-foreground/75 font-medium">
-                বিকাশ, নগদ, রকেট এবং কার্ডের স্বয়ংক্রিয় ইনস্ট্যান্ট পেমেন্ট গেটওয়ে। শিক্ষার্থীরা পে করলেই সাথে সাথে কোর্স অ্যাক্সেস পেয়ে যাবে।
+                বিকাশ, নগদ, রকেট এবং কার্ডের সম্পূর্ণ স্বয়ংক্রিয় ইনস্ট্যান্ট পেমেন্ট গেটওয়ে। শিক্ষার্থীরা পে করার সাথে সাথেই অটো-এনরোল হবে এবং সার্ভার-সাইড মেটা পিক্সেল (CAPI) পারচেজ ইভেন্ট ফায়ার হবে।
               </p>
             </div>
           </div>
@@ -90,15 +90,15 @@ export default function SettingsForm({ initialSettings }: { initialSettings: Set
         <div className="space-y-4">
           <div className="bg-surface/80 border border-border rounded-xl p-4 space-y-3 text-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span className="font-bold text-foreground/80">Bingo Pay Webhook / IPN URL:</span>
+              <span className="font-bold text-foreground/80">UddoktaPay Webhook / IPN URL:</span>
               <code className="bg-surface px-2.5 py-1 rounded-md text-primary font-mono text-xs select-all border border-border">
-                https://evorisemedia.com/api/payment/bingopay/webhook
+                https://evorisemedia.com/api/payment/uddoktapay/webhook
               </code>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span className="font-bold text-foreground/80">Customer Return / Callback URL:</span>
               <code className="bg-surface px-2.5 py-1 rounded-md text-foreground font-mono text-xs select-all border border-border">
-                https://evorisemedia.com/api/payment/bingopay/callback
+                https://evorisemedia.com/api/payment/uddoktapay/callback
               </code>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function SettingsForm({ initialSettings }: { initialSettings: Set
           <div className="p-3 bg-surface/50 border border-border rounded-xl text-xs text-foreground/75 flex items-start gap-2.5">
             <Info size={16} className="text-primary mt-0.5 shrink-0" />
             <p className="leading-relaxed">
-              আপনার Bingo Pay মার্চেন্ট ড্যাশবোর্ড থেকে প্রাপ্ত <strong>Merchant ID</strong>, <strong>API Key</strong> এবং <strong>Secret Key</strong> আপনার প্রোডাকশন সার্ভারের <code className="text-primary font-mono">.env</code> ফাইলে যুক্ত করুন।
+              আপনার UddoktaPay বা Paymently প্যানেল থেকে প্রাপ্ত <strong>API Key</strong> এবং <strong>Base URL</strong> আপনার সার্ভারের <code className="text-primary font-mono">.env</code> ফাইলে যুক্ত করা আছে।
             </p>
           </div>
         </div>
