@@ -65,33 +65,50 @@ export const dynamic = "force-dynamic";
    PAGE COMPONENT
    ══════════════════════════════════════════════════════════════ */
 export default async function Home() {
-  const totalUsers   = await db.user.count();
-  const totalCourses = await db.course.count({ where: { isDeleted: false } });
-  const totalLessons = await db.lesson.count({ where: { isDeleted: false } });
-
-  const stats = {
-    students: totalUsers   > 500 ? totalUsers   : 500 + totalUsers,
-    courses:  totalCourses > 10  ? totalCourses  : 10 + totalCourses,
-    lessons:  totalLessons > 100 ? totalLessons  : 100 + totalLessons,
+  let stats = {
+    students: 500,
+    courses: 10,
+    lessons: 100,
     rating: 4.9
   };
+  let courses: any[] = [];
+  let banners: any[] = [];
 
-  const courses = await db.course.findMany({
-    take: 3,
-    where: { published: true, isDeleted: false },
-    orderBy: { createdAt: "desc" },
-    include: {
-      modules: {
-        where: { isDeleted: false },
-        include: { lessons: { where: { isDeleted: false } } }
-      }
+  try {
+    if (process.env.DATABASE_URL) {
+      const [totalUsers, totalCourses, totalLessons, fetchedCourses, fetchedBanners] = await Promise.all([
+        db.user.count().catch(() => 0),
+        db.course.count({ where: { isDeleted: false } }).catch(() => 0),
+        db.lesson.count({ where: { isDeleted: false } }).catch(() => 0),
+        db.course.findMany({
+          take: 3,
+          where: { published: true, isDeleted: false },
+          orderBy: { createdAt: "desc" },
+          include: {
+            modules: {
+              where: { isDeleted: false },
+              include: { lessons: { where: { isDeleted: false } } }
+            }
+          }
+        }).catch(() => []),
+        db.banner.findMany({
+          where: { isActive: true },
+          orderBy: { order: "asc" },
+        }).catch(() => [])
+      ]);
+
+      stats = {
+        students: totalUsers > 500 ? totalUsers : 500 + totalUsers,
+        courses: totalCourses > 10 ? totalCourses : 10 + totalCourses,
+        lessons: totalLessons > 100 ? totalLessons : 100 + totalLessons,
+        rating: 4.9
+      };
+      courses = fetchedCourses;
+      banners = fetchedBanners;
     }
-  });
-
-  const banners = await db.banner.findMany({
-    where: { isActive: true },
-    orderBy: { order: "asc" },
-  });
+  } catch (error) {
+    console.warn("Could not fetch database records for Home page (using fallback):", error);
+  }
 
   return (
     <div className="flex flex-col">

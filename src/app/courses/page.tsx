@@ -9,16 +9,23 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function CoursesPage() {
-  const courses = await db.course.findMany({
-    where: { published: true, isDeleted: false },
-    orderBy: { createdAt: "desc" },
-    include: {
-      modules: {
-        where: { isDeleted: false },
-        include: { lessons: { where: { isDeleted: false } } }
-      }
-    },
-  });
+  let courses: any[] = [];
+  try {
+    if (process.env.DATABASE_URL) {
+      courses = await db.course.findMany({
+        where: { published: true, isDeleted: false },
+        orderBy: { createdAt: "desc" },
+        include: {
+          modules: {
+            where: { isDeleted: false },
+            include: { lessons: { where: { isDeleted: false } } }
+          }
+        },
+      });
+    }
+  } catch (error) {
+    console.warn("Could not fetch courses from database (using fallback):", error);
+  }
 
   return <CoursesClient initialCourses={courses} />;
 }
