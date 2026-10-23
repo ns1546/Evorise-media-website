@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 export const trackEvent = async (eventName: string, customData: Record<string, any> = {}, userData: Record<string, any> = {}) => {
   const eventId = "evt_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
@@ -41,38 +41,48 @@ export const fbEvent = (name: string, options = {}) => {
   trackEvent(name, options);
 };
 
-export default function MetaPixel({ fbPixelId }: { fbPixelId?: string | null }) {
+function MetaPixelTracker({ fbPixelId }: { fbPixelId: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!fbPixelId) return;
     pageview();
   }, [pathname, searchParams, fbPixelId]);
 
+  return null;
+}
+
+export default function MetaPixel({ fbPixelId }: { fbPixelId?: string | null }) {
+  const [loaded, setLoaded] = useState(false);
+
   if (!fbPixelId) {
     return null;
   }
 
   return (
-    <Script
-      id="fb-pixel"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '${fbPixelId}');
-        `,
-      }}
-      onLoad={() => setLoaded(true)}
-    />
+    <>
+      <Suspense fallback={null}>
+        <MetaPixelTracker fbPixelId={fbPixelId} />
+      </Suspense>
+      <Script
+        id="fb-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${fbPixelId}');
+          `,
+        }}
+        onLoad={() => setLoaded(true)}
+      />
+    </>
   );
 }

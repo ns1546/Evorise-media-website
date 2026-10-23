@@ -1,4 +1,5 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Noto_Sans_Bengali } from "next/font/google";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
@@ -43,14 +44,26 @@ export const viewport: Viewport = {
 
 import { prisma } from "@/lib/prisma";
 
+async function getGlobalSettings() {
+  if (!process.env.DATABASE_URL) {
+    return null;
+  }
+  try {
+    return await prisma.setting.findUnique({
+      where: { id: "global" },
+    });
+  } catch (error) {
+    console.warn("Could not fetch global settings from database (falling back to environment variables):", error);
+    return null;
+  }
+}
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await prisma.setting.findUnique({
-    where: { id: "global" }
-  });
+  const settings = await getGlobalSettings();
   const fbPixelId = settings?.facebookPixelId || process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
   const gaId = settings?.googleAnalyticsId || process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
@@ -61,8 +74,12 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-primary/20 selection:text-foreground">
         <AuthProvider>
-          <MetaPixel fbPixelId={fbPixelId} />
-          <GoogleAnalytics gaId={gaId} />
+          <Suspense fallback={null}>
+            <MetaPixel fbPixelId={fbPixelId} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <GoogleAnalytics gaId={gaId} />
+          </Suspense>
           <Header />
           <main className="grow">{children}</main>
           <Footer />

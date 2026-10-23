@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 
@@ -6,13 +6,13 @@ const prisma = new PrismaClient();
 
 async function runRestore(targetFilePath) {
   const filePath = targetFilePath || path.join(process.cwd(), 'backups', 'latest.json');
-  console.log(`🔄 Starting complete database restore from: ${filePath}`);
+  console.log(`ðŸ”„ Starting complete database restore from: ${filePath}`);
 
-  if (!fs.existsSync(filePath)) {
+  if (!fs.existsSync(/*turbopackIgnore: true*/ filePath)) {
     throw new Error(`Backup file does not exist at: ${filePath}`);
   }
 
-  const raw = fs.readFileSync(filePath, 'utf-8');
+  const raw = fs.readFileSync(/*turbopackIgnore: true*/ filePath, 'utf-8');
   const backup = JSON.parse(raw);
 
   if (!backup.data) {
@@ -36,7 +36,7 @@ async function runRestore(targetFilePath) {
     contactMessages = [],
   } = backup.data;
 
-  console.log(`📊 Restoring: ${users.length} Users, ${courses.length} Courses, ${modules.length} Modules, ${lessons.length} Lessons, ${orders.length} Orders...`);
+  console.log(`ðŸ“Š Restoring: ${users.length} Users, ${courses.length} Courses, ${modules.length} Modules, ${lessons.length} Lessons, ${orders.length} Orders...`);
 
   await prisma.$transaction(async (tx) => {
     // 1. Restore independent tables
@@ -148,7 +148,7 @@ async function runRestore(targetFilePath) {
     }
   });
 
-  console.log('✅ Database restore completed with 100% data integrity!');
+  console.log('âœ… Database restore completed with 100% data integrity!');
   await prisma.$disconnect();
   return { success: true, count: backup.metadata?.totalRecords };
 }
@@ -158,9 +158,10 @@ if (require.main === module) {
   runRestore(customFile)
     .then(() => process.exit(0))
     .catch((err) => {
-      console.error('❌ Restore failed:', err);
+      console.error('âŒ Restore failed:', err);
       process.exit(1);
     });
 }
 
 module.exports = { runRestore };
+

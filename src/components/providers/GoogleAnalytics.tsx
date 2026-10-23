@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
 /**
  * Fires a custom Google Analytics / Google Ads conversion event.
@@ -14,7 +14,7 @@ export const gtagEvent = (action: string, params: Record<string, any> = {}) => {
   }
 };
 
-export default function GoogleAnalytics({ gaId }: { gaId?: string | null }) {
+function GoogleAnalyticsTracker({ gaId }: { gaId: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -28,12 +28,19 @@ export default function GoogleAnalytics({ gaId }: { gaId?: string | null }) {
     }
   }, [pathname, searchParams, gaId]);
 
+  return null;
+}
+
+export default function GoogleAnalytics({ gaId }: { gaId?: string | null }) {
   if (!gaId) {
     return null;
   }
 
   return (
     <>
+      <Suspense fallback={null}>
+        <GoogleAnalyticsTracker gaId={gaId} />
+      </Suspense>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
