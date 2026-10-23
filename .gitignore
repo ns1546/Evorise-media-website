@@ -64,3 +64,6 @@ DESIGN.md
 .agents/
 
 netlify-env-for-upload.txt
+
+*.db
+prisma/*.db

@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding the database with realistic courses...');
 
-  const hashedPassword = await bcrypt.hash('@Nstasin41@', 10);
+  const hashedPassword = await bcrypt.hash('AdminPassword123!', 10);
 
   // 1. Create a dummy author/instructor
   const admin = await prisma.user.upsert({

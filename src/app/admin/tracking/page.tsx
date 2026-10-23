@@ -172,7 +172,7 @@ export default function TrackingCenterPage() {
                   type="text"
                   value={pixelId}
                   onChange={(e) => setPixelId(e.target.value)}
-                  placeholder="যেমন: 1480588610570640"
+                  placeholder="যেমন: "
                   className="w-full px-4 py-3 bg-surface-raised border border-border rounded-xl text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-all pr-24"
                   required
                 />
@@ -209,7 +209,7 @@ export default function TrackingCenterPage() {
                 <textarea
                   value={capiToken}
                   onChange={(e) => setCapiToken(e.target.value)}
-                  placeholder="EAAY6jIemkUI..."
+                  placeholder="EAA..."
                   rows={showToken ? 4 : 2}
                   className={`w-full px-4 py-3 bg-surface-raised border border-border rounded-xl text-foreground font-mono text-xs focus:outline-none focus:border-primary transition-all leading-relaxed ${
                     !showToken ? "blur-[2px] hover:blur-none transition-all duration-200" : ""
@@ -231,7 +231,7 @@ export default function TrackingCenterPage() {
                 type="text"
                 value={testCode}
                 onChange={(e) => setTestCode(e.target.value)}
-                placeholder="যেমন: TEST19759"
+                placeholder="যেমন: "
                 className="w-full px-4 py-3 bg-surface-raised border border-border rounded-xl text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-all"
               />
               <p className="text-xs text-foreground/60 mt-1.5">

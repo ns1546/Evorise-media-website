@@ -176,8 +176,8 @@ if (fs.existsSync(path.join(rootDir, '.env'))) {
   // Copy original to config (for backup) and also sanitized example
   fs.writeFileSync(path.join(configDir, '.env.backup'), envContent);
   const sanitizedEnv = envContent
-    .replace(/(DATABASE_URL=")[^"]+(")/, '$1postgresql://user:pass@host:5432/db$2')
-    .replace(/(DIRECT_URL=")[^"]+(")/, '$1postgresql://user:pass@host:5432/db$2')
+    .replace(/(DATABASE_URL=")[^"]+(")/, '$1postgresql://[USER]:[PASSWORD]@[HOST]:5432/[DB]$2')
+    .replace(/(DIRECT_URL=")[^"]+(")/, '$1postgresql://[USER]:[PASSWORD]@[HOST]:5432/[DB]$2')
     .replace(/(NEXTAUTH_SECRET=")[^"]+(")/, '$1your-nextauth-secret-here$2');
   fs.writeFileSync(path.join(configDir, '.env.example'), sanitizedEnv);
 }
