@@ -33,6 +33,15 @@ export const metadata: Metadata = {
     title: "EvoRise Media | ক্রিয়েটিভ মিডিয়া ও মিউজিক একাডেমি",
     description: "EvoRise Media-র প্রধান প্রশিক্ষক JKH Jesan-এর সাথে প্রফেশনাল মিউজিক প্রোডাকশন শিখুন।",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/brand-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {

@@ -73,6 +73,9 @@ export default async function Home() {
   };
   let courses: any[] = [];
   let banners: any[] = [];
+  let whyChooseUsImage = "/images/why-choose-us.jpg";
+  let heroMentorImage = "/images/mentor-jjesan-mandolin.jpg";
+  let aboutMentorImage = "/images/mentor-jjesan-accordion.jpg";
 
   try {
     if (process.env.DATABASE_URL) {
@@ -104,7 +107,15 @@ export default async function Home() {
         rating: 4.9
       };
       courses = fetchedCourses;
-      banners = fetchedBanners;
+      banners = fetchedBanners.filter((b: any) => !b.targetUrl?.startsWith("section:"));
+
+      const whyChooseUsBanner = fetchedBanners.find((b: any) => b.targetUrl === "section:why-choose-us" && b.isActive);
+      const heroMentorBanner = fetchedBanners.find((b: any) => b.targetUrl === "section:hero-mentor" && b.isActive);
+      const aboutMentorBanner = fetchedBanners.find((b: any) => b.targetUrl === "section:about-mentor" && b.isActive);
+
+      if (whyChooseUsBanner?.imageUrl) whyChooseUsImage = whyChooseUsBanner.imageUrl;
+      if (heroMentorBanner?.imageUrl) heroMentorImage = heroMentorBanner.imageUrl;
+      if (aboutMentorBanner?.imageUrl) aboutMentorImage = aboutMentorBanner.imageUrl;
     }
   } catch (error) {
     console.warn("Could not fetch database records for Home page (using fallback):", error);
@@ -198,7 +209,7 @@ export default async function Home() {
                 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/mentor-jjesan-mandolin.jpg"
+                  src={heroMentorImage}
                   alt="JKH Jesan — Music Producer & Instructor"
                   className="w-full h-full object-cover object-center"
                 />
@@ -414,7 +425,7 @@ export default async function Home() {
                 style={{ aspectRatio: "4/5", maxWidth: "420px", margin: "0 auto", boxShadow: "var(--shadow-xl)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/mentor-jjesan-accordion.jpg"
+                  src={aboutMentorImage}
                   alt="JKH Jesan — Lead Music Producer & Instructor"
                   className="w-full h-full object-cover object-top"
                 />
