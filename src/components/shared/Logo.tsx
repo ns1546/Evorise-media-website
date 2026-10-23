@@ -8,7 +8,7 @@ interface LogoProps {
 }
 
 export function Logo({
-  variant = "auto",
+  variant = "dark",
   size = "md",
   markOnly = false,
   className = "",
@@ -45,8 +45,7 @@ export function Logo({
     );
   }
 
-  // When variant="white" (for dark surfaces like Admin sidebar, Login dark hero, or dark footer):
-  // Directly render the WHITE logo on 100% TRANSPARENT background — ZERO white box, ZERO pill wrapper!
+  // When variant="white" (for dark surfaces like Admin sidebar or dark hero):
   if (variant === "white") {
     return (
       <div className={"flex items-center shrink-0 " + className}>
@@ -62,26 +61,8 @@ export function Logo({
     );
   }
 
-  // When variant="dark" (for light surfaces):
-  if (variant === "dark") {
-    return (
-      <div className={"flex items-center shrink-0 " + className}>
-        <img
-          src="/logo-tight-dark.png"
-          alt="EVORISE MEDIA"
-          width={dim.width}
-          height={dim.height}
-          className="object-contain shrink-0"
-          style={{ height: dim.height, width: "auto" }}
-        />
-      </div>
-    );
-  }
-
-  // Default auto variant:
-  // On light backgrounds displays black logo on 100% transparent background
-  // If dark mode is active on html (dark:), displays white logo on 100% transparent background
-  // ZERO white boxes or pill wrappers anywhere!
+  // Default: Always render the crisp high-contrast dark logo on 100% transparent background
+  // Perfectly visible on the Warm Studio cream palette regardless of device dark mode settings
   return (
     <div className={"flex items-center shrink-0 " + className}>
       <img
@@ -89,15 +70,7 @@ export function Logo({
         alt="EVORISE MEDIA"
         width={dim.width}
         height={dim.height}
-        className="object-contain shrink-0 block dark:hidden"
-        style={{ height: dim.height, width: "auto" }}
-      />
-      <img
-        src="/logo-tight-white.png"
-        alt="EVORISE MEDIA"
-        width={dim.width}
-        height={dim.height}
-        className="object-contain shrink-0 hidden dark:block"
+        className="object-contain shrink-0"
         style={{ height: dim.height, width: "auto" }}
       />
     </div>
